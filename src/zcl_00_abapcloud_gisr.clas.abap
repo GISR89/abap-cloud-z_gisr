@@ -1,13 +1,23 @@
-class ZCL_00_ABAPCLOUD_GISR definition
-  public
-  create private .
+CLASS zcl_00_abapcloud_gisr DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+  INTERFACES if_oo_adt_classrun.
+
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_00_ABAPCLOUD_GISR IMPLEMENTATION.
+CLASS zcl_00_abapcloud_gisr IMPLEMENTATION.
+
+  METHOD if_oo_adt_classrun~main.
+
+ out->write( 'This is my first class' ).
+
+  ENDMETHOD.
+
 ENDCLASS.
