@@ -105,12 +105,12 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *    DATA(lv_date3) = CONV d( lv_date2 ).
 *    out->write( | { lv_date3 DATE = USER } | ).
 
-*
+**
 *    DATA: lv_date  TYPE d VALUE '20250101',
 *          lv_date2 TYPE d VALUE '20250622',
 *          lv_time  TYPE t,
-*          lv_type2 TYPE c LENGTH 6.
-
+*          lv_time2 TYPE c LENGTH 6.
+*
 *    lv_date = cl_abap_context_info=>get_system_date( ).
 *    lv_time = cl_abap_context_info=>get_system_time( ).
 *    lv_time2 = cl_abap_context_info=>get_user_time_zone( ).
@@ -119,14 +119,14 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *    out->write( lv_time ).
 *    out->write( lv_time ).
 *
-
+*
 *    DATA(lv_days) = lv_date2 - lv_date.
 *    out->write(  lv_days ).
-*
-*
-*    "aaaammdd
-*    "offset
-*
+**
+**
+**    "aaaammdd
+**    "offset
+**
 *    DATA(lv_month) = lv_date2+4(2).
 *    out->write( lv_month ).
 *
@@ -135,7 +135,8 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *
 *    DATA(lv_day) = lv_date+6(2).
 *    out->write( lv_day ).
-
+*
+*out->write(  lv_days ).
 *
 *    out->write( TEXT-001 ).
 *    out->write( TEXT-002 ).
@@ -155,10 +156,10 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *&&
 *| |
 *CONCATENATE
-
-    DATA :lv_string_a TYPE string VALUE 'Welcome to logali group',
-          lv_string_b TYPE string.
 *
+*    DATA :lv_string_a TYPE string VALUE 'Welcome to logali group',
+*          lv_string_b TYPE string.
+**
 *    lv_string_b = 'ABAP' && `**` && 'Student'.
 *
 *    out->write( lv_string_b ).
@@ -180,7 +181,7 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 
 *Condensacion
 
-    lv_string_a = '          Welcome   to  Logali  Group  '.
+*    lv_string_a = '          Welcome   to  Logali  Group  '.
 
 *    lv_string_a = condense(  lv_string_a ).
 *
@@ -227,15 +228,15 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *strlen numofchar
 
 *    DATA lv_val TYPE c LENGTH 6.
-*
-*    DATA(lv_val) = strlen( 'Logali group   ' ).
-*    out->write( lv_val  ).
-*
-*    DATA(lv_val2) = strlen( `Logali group  ` ).
-*    out->write( lv_val2 ).
-*
-*    DATA(lv_val3) = numofchar( 'Logali Group   ' ).
-*    out->write( lv_val3 ).
+
+    DATA(lv_val) = strlen( 'Logali group   ' ).
+    out->write( lv_val  ).
+
+    DATA(lv_val2) = strlen( `Logali group  ` ).
+    out->write( lv_val2 ).
+
+    DATA(lv_val3) = numofchar( 'Logali Group   ' ).
+    out->write( lv_val3 ).
 *
 *    DATA(lv_val4) = numofchar( `Logali group  ` ).
 *    out->write( lv_val4 ).
@@ -247,8 +248,8 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 * >= GE
 * <= LE
 * <> NE
-
-    DATA(lv_cust) = 'X'.
+*
+*    DATA(lv_cust) = 'X'.
 
 *    IF lv_cust EQ 'A'.
 *      out->write(  | Customer 1 { lv_cust }| ).
@@ -294,31 +295,31 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *ENDIF.
 
 *CASE
-
-    lv_cust = 'A'.
-
-    CASE lv_cust.
-
-      WHEN 'A'.
-        out->write( |Customer 1 { lv_cust }| ).
-
-      WHEN 'B'.
-        out->write( |Customer 2 { lv_cust }| ).
-
-
-      WHEN 'C'.
-        out->write( |Customer 3 { lv_cust }| ).
-
-      WHEN OTHERS.
-
-        out->write(  'INCORRECT' ).
-
-    ENDCASE.
+*
+*    lv_cust = 'A'.
+*
+*    CASE lv_cust.
+*
+*      WHEN 'A'.
+*        out->write( |Customer 1 { lv_cust }| ).
+*
+*      WHEN 'B'.
+*        out->write( |Customer 2 { lv_cust }| ).
+*
+*
+*      WHEN 'C'.
+*        out->write( |Customer 3 { lv_cust }| ).
+*
+*      WHEN OTHERS.
+*
+*        out->write(  'INCORRECT' ).
+*
+*    ENDCASE.
 
 
 *DO/ENDDO
-
-    DATA lv_cont TYPE i.
+*
+*    DATA lv_cont TYPE i.
 
 *    DO 20 TIMES.
 *
@@ -334,34 +335,63 @@ CLASS zcl_01_abapcoud_clase5_051024 IMPLEMENTATION.
 *    ENDDO.
 
 *WHILE
-
-    WHILE lv_cont LT 30.
-      lv_cont += 1.
-      out->write(  |COUNT { lv_cont }| ).
-
-    ENDWHILE.
-
-
-*COND
-
-    lv_cust = 'A'.
-
-    DATA(lv_inv) = COND string( WHEN lv_cust = 'A' THEN | INVA01|
-                                WHEN lv_cust = 'B' THEN | INVA02|
-                                WHEN lv_cust = 'C' THEN | INVA03|
-                                ELSE | INVALID| ).
-
-    out->write( lv_inv ).
-
-*SWITCH
 *
-    DATA(lv_inv2) = SWITCH string( lv_cust
-                                 WHEN 'A' THEN | INVA01 |
-                                 WHEN 'B' THEN | INVA02 |
-                                 WHEN 'C' THEN | INVA03 |
-                                  ELSE | INVALID | ).
+*    WHILE lv_cont LT 30.
+*      lv_cont += 1.
+*      out->write(  |COUNT { lv_cont }| ).
+*
+*    ENDWHILE.
 *
 *
+**COND
+*
+*    lv_cust = 'A'.
+*
+*    DATA(lv_inv) = COND string( WHEN lv_cust = 'A' THEN | INVA01|
+*                                WHEN lv_cust = 'B' THEN | INVA02|
+*                                WHEN lv_cust = 'C' THEN | INVA03|
+*                                ELSE | INVALID| ).
+*
+*    out->write( lv_inv ).
+*
+**SWITCH
+**
+*    DATA(lv_inv2) = SWITCH string( lv_cust
+*                                 WHEN 'A' THEN | INVA01 |
+*                                 WHEN 'B' THEN | INVA02 |
+*                                 WHEN 'C' THEN | INVA03 |
+*                                  ELSE | INVALID | ).
+**
+**
+*
+*    DATA lv_number TYPE i.
+*
+*    lv_number = 4.
+*
+*   while lv_number LT 5.
+*   CONTINUE.
+*
+*      out->write( |Numero = { lv_number }| ).
+*
+*      lv_number = lv_number + 1.
+
+*endwhile.
+
+
+*DATA lv_number TYPE i.
+*while lv_number le 10.
+*lv_number = lv_number + 1.
+*
+*out->write( |Numero = { lv_number }| ).
+*
+*if lv_number eq 4.
+*continue.
+*endif.
+*endwhile.
+
+
+
+
   ENDMETHOD.
 
 ENDCLASS.
